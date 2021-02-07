@@ -46,10 +46,10 @@ The weather information should be taken from an external API: OpenWeatherMap RES
 
 ### (2) API Scheme examples
 
-Methods		Endpoints
+Methods     Endpoints
 -------------------------------------------------------------
-GET			/api/v1/city?name={city name}&code={country code}
-POST		/api/v1/city
+- GET           /api/v1/city?name={city name}&code={country code}
+- POST      /api/v1/city
 
 ### (3) JSON format
 
