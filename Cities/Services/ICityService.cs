@@ -14,7 +14,6 @@ namespace Cities.Services
         Task<bool> SaveChangesAsync();
         Task<IEnumerable<City>> ListCitiesAsync();
         Task<City> GetCityByIdAsync(int id);
-        Task<City> PatchCityAsync(int id);
-        Task DeleteCityAsync(int id);
+        Task<bool> DeleteCityAsync(City city);
     }
 }

@@ -59,16 +59,10 @@ namespace Cities.Services
             return await _cityRepo.GetCityByIdAsync(id);
         }
 
-        public Task<City> PatchCityAsync(int id)
+        public async Task<bool> DeleteCityAsync(City city)
         {
-            throw new NotImplementedException();
+            _cityRepo.Delete(city);
+            return await SaveChangesAsync();
         }
-
-        public Task DeleteCityAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        
     }
 }

@@ -6,10 +6,11 @@ This project offers the web APIs for companies or individuals to access and mana
 - REST APIs and a simple Client
 - Automapper
 - DI (Dependency Injection)
-- Entity Framework
+- Entity Framework Core
 - Repository-Service Pattern
 - HttpClient
 - DTO
+- Complete CRUD with HTTP PATCH method
 
 ## API Design Specifications
 
@@ -69,7 +70,7 @@ The response is:
     "alpha2Code": "US",
     "alpha3Code": "USA",
     "currenciesCode": "USD",
-    "weather": "snow"
+    "weather": "snow, -2C"
 }
 ```
 

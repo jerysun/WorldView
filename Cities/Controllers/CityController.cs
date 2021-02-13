@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Cities.Services;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace Cities.Controllers
 {
@@ -46,7 +47,7 @@ namespace Cities.Controllers
         public async Task<IActionResult> ListCities()
         {
             var cities = await _service.ListCitiesAsync();
-            
+
             if (cities != null)
             {
                 foreach (var city in cities)
@@ -72,7 +73,7 @@ namespace Cities.Controllers
         }
 
         // PUT /api/v1/city/3
-        [HttpPut("city/{id}")]
+        [HttpPut("city/{id:int}")]
         public async Task<IActionResult> UpdateCity(int id, CityUpdateDto cityUpdateDto)
         {
             if (cityUpdateDto == null) return BadRequest();
@@ -88,7 +89,7 @@ namespace Cities.Controllers
                 )
                 return BadRequest("Country or its codes or currency is invalid!");
 
-             _mapper.Map<CityUpdateDto, City>(cityUpdateDto, cityFromRepo);
+            _mapper.Map<CityUpdateDto, City>(cityUpdateDto, cityFromRepo);
 
             if (await _service.SaveChangesAsync())
                 return NoContent();
@@ -96,5 +97,30 @@ namespace Cities.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
+        // PATCH /api/v1/city/3
+        [HttpPatch("city/{id:int}")]
+        public async Task<IActionResult> PatchCity(int id, [FromBody] JsonPatchDocument<City> patchEntity)
+        {
+            if (patchEntity == null) return BadRequest();
+
+            var cityFromRepo = await _service.GetCityByIdAsync(id);
+            if (cityFromRepo == null) return NotFound();
+
+            patchEntity.ApplyTo(cityFromRepo, ModelState);
+            await _service.SaveChangesAsync();
+            return Ok(cityFromRepo);
+        }
+
+        // DELETE /api/v1/city/3
+        [HttpDelete("city/{id:int}")]
+        public async Task<IActionResult> DeleteCity(int id)
+        {
+            var cityFromRepo = await _service.GetCityByIdAsync(id);
+            if (cityFromRepo == null) return NotFound();
+
+            if (await _service.DeleteCityAsync(cityFromRepo)) return NoContent();
+
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
     }
 }
