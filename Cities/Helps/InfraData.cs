@@ -67,16 +67,28 @@ namespace Cities.Helps
 
             HttpClient client = new HttpClient();
             var result = client.GetAsync(uriBuilder.Uri).Result;
-            string weather = string.Empty;
+            StringBuilder sbWeather = new StringBuilder();
 
             using (StreamReader sr = new StreamReader(result.Content.ReadAsStreamAsync().Result))
             {
 
                 string weatherInfo = sr.ReadToEnd();
                 dynamic data = JObject.Parse(weatherInfo);
-                weather = data.weather[0].description;
+
+                sbWeather.Append(data.weather[0].description);
+
+                string temp = K2C(Convert.ToDouble(data.main.temp));
+                sbWeather.Append($", {temp}");
             }
-            return weather;
+            return sbWeather.ToString();
+        }
+
+        // kelvin to celsius
+        private static string K2C(double k)
+        {
+            double tDbl = k - 273.15 + 0.5;
+            int tInt = (int)tDbl;
+            return tInt.ToString()+"C";
         }
     }
 }

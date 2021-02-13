@@ -44,5 +44,16 @@ namespace Cities.Repositories
                 return await _context.Cities.FirstOrDefaultAsync(ct => ct.Name.Equals(name) && ct.Alpha2Code.Equals(countryCode));
             }
         }
+
+        public async Task<City> GetCityByIdAsync(int id)
+        {
+            var city = await _context.Cities.FindAsync(id);
+            return city;
+        }
+
+        public async Task<IEnumerable<City>> GetAllCitiesAsync()
+        {
+            return await _context.Cities.ToListAsync();
+        }
     }
 }

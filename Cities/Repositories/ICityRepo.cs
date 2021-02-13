@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Cities.Repositories
 {
@@ -8,6 +9,8 @@ namespace Cities.Repositories
         void Delete<T>(T entity) where T : class;
         Task<bool> SaveChangesAsync();
         Task<City> GetCityByNamesAsync(string name, string countryCode);
+        Task<City> GetCityByIdAsync(int id);
+        Task<IEnumerable<City>> GetAllCitiesAsync();
         
     }
 }

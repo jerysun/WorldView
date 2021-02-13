@@ -25,9 +25,9 @@ namespace Cities.Services
             return await _cityRepo.GetCityByNamesAsync(name, countryCode);
         }
 
-        public Task<IEnumerable<City>> ListCitiesAsync()
+        public async Task<IEnumerable<City>> ListCitiesAsync()
         {
-            throw new NotImplementedException();
+            return await _cityRepo.GetAllCitiesAsync();
         }
 
         public async Task<ReturnedUpload> UploadCityAsync(CityUploadDto cityUploadDto)
@@ -49,9 +49,14 @@ namespace Cities.Services
             return result;
         }
 
-        public Task<City> UpdateCityAsync(int id)
+        public async Task<bool> SaveChangesAsync()
         {
-            throw new NotImplementedException();
+            return await _cityRepo.SaveChangesAsync();
+        }
+
+        public async Task<City> GetCityByIdAsync(int id)
+        {
+            return await _cityRepo.GetCityByIdAsync(id);
         }
 
         public Task<City> PatchCityAsync(int id)
@@ -63,5 +68,7 @@ namespace Cities.Services
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }

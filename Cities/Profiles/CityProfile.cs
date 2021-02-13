@@ -13,6 +13,7 @@ namespace Cities.Profiles
         {
             //source -> target
             CreateMap<CityUploadDto, City>();
+            CreateMap<CityUpdateDto, City>();
         }
     }
 }

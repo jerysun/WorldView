@@ -11,8 +11,9 @@ namespace Cities.Services
     {
         Task<City> GetCityByNameAndCodeAsync(string name, string countryCode);
         Task<ReturnedUpload> UploadCityAsync(CityUploadDto cityUploadDto);
+        Task<bool> SaveChangesAsync();
         Task<IEnumerable<City>> ListCitiesAsync();
-        Task<City> UpdateCityAsync(int id);
+        Task<City> GetCityByIdAsync(int id);
         Task<City> PatchCityAsync(int id);
         Task DeleteCityAsync(int id);
     }

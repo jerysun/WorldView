@@ -16,14 +16,12 @@ namespace HClient
             /*string weather = GetCityWeather("Amsterdam", "us");
             Console.WriteLine($"weather: {weather}");*/
 
-            //var countriesFullNames = InfraData.GetCountriesFullNames();
             foreach(var cname in InfraData.CountriesNames) Console.WriteLine(cname);
 
             foreach(var ccode in InfraData.CountriesCodes)
             {
                 Console.WriteLine($"{ccode.Key}: {ccode.Value.Alpha2Code}, {ccode.Value.Alpha3Code}, {ccode.Value.CurrenciesCode}");
             }
-
         }
 
         static string GetCityWeather(string cityName, string countryCode = null)
@@ -43,18 +41,31 @@ namespace HClient
 
             HttpClient client = new HttpClient();
             var result = client.GetAsync(uriBuilder.Uri).Result;
-            string weather = string.Empty;
+            StringBuilder sbWeather = new StringBuilder();
 
             using (StreamReader sr = new StreamReader(result.Content.ReadAsStreamAsync().Result))
             {
                 
                 string weatherInfo = sr.ReadToEnd();
                 dynamic data = JObject.Parse(weatherInfo);
-                weather = data.weather[0].description;
+
+                sbWeather.Append(data.weather[0].description);
+
+                string temp = K2C(Convert.ToDouble(data.main.temp));
+                sbWeather.Append($", {temp}");
             }
-            return weather;
+            return sbWeather.ToString();
         }
 
-        
+        // kelvin to celsius
+        static string K2C(double k)
+        {
+            double tDbl = k - 273.15 + 0.5;
+            int tInt = (int)tDbl;
+            return tInt.ToString() + "C";
+        }
+
+
+
     }
 }
