@@ -49,8 +49,12 @@ The weather information should be taken from an external API: OpenWeatherMap RES
 
 Methods     Endpoints
 -------------------------------------------------------------
-- GET           /api/v1/city?name={city name}&code={country code}
+- GET       /api/v1/city?name={city name}&code={country code}
 - POST      /api/v1/city
+- GET       /api/v1/city/listall
+- PUT       /api/v1/city/{id:int}
+- PATCH     /api/v1/city/{id:int}
+- DELETE    /api/v1/city/{id:int}
 
 ### (3) JSON format
 
