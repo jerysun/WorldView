@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Cities.Dtos;
-using Cities.Helps;
+using Cities.Helpers;
 using Cities.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.JsonPatch;
 
 namespace Cities.Controllers
 {
-    [Route("api/v1")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class CityController : ControllerBase
     {
@@ -31,7 +31,7 @@ namespace Cities.Controllers
         }
 
         // GET	/api/v1/city?name={city name}&code={country code}
-        [HttpGet("city")]
+        [HttpGet]
         public async Task<IActionResult> GetCityByNameAndCode(string name, string code)
         {
             var cityFromRepo = await _service.GetCityByNameAndCodeAsync(name, code);
@@ -43,7 +43,7 @@ namespace Cities.Controllers
         }
 
         // GET	/api/v1/city
-        [HttpGet("city/listall")]
+        [HttpGet("listall")]
         public async Task<IActionResult> ListCities()
         {
             var cities = await _service.ListCitiesAsync();
@@ -60,7 +60,7 @@ namespace Cities.Controllers
         }
 
         // POST	/api/v1/city
-        [HttpPost("city")]
+        [HttpPost]
         public async Task<IActionResult> UploadCity([FromBody] CityUploadDto cityUploadDto)
         {
             if (cityUploadDto == null || !InfraData.CountriesNames.Contains(cityUploadDto.Country))
@@ -73,7 +73,7 @@ namespace Cities.Controllers
         }
 
         // PUT /api/v1/city/3
-        [HttpPut("city/{id:int}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateCity(int id, CityUpdateDto cityUpdateDto)
         {
             if (cityUpdateDto == null) return BadRequest();
@@ -98,7 +98,7 @@ namespace Cities.Controllers
         }
 
         // PATCH /api/v1/city/3
-        [HttpPatch("city/{id:int}")]
+        [HttpPatch("{id:int}")]
         public async Task<IActionResult> PatchCity(int id, [FromBody] JsonPatchDocument<City> patchEntity)
         {
             if (patchEntity == null) return BadRequest();
@@ -112,7 +112,7 @@ namespace Cities.Controllers
         }
 
         // DELETE /api/v1/city/3
-        [HttpDelete("city/{id:int}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteCity(int id)
         {
             var cityFromRepo = await _service.GetCityByIdAsync(id);

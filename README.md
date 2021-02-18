@@ -9,7 +9,9 @@ This project offers the web APIs for companies or individuals to access and mana
 - Entity Framework Core
 - Repository-Service Pattern
 - HttpClient
+- Pagination
 - DTO
+- JWT
 - Complete CRUD with HTTP PATCH method
 
 ## API Design Specifications

@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cities.Helps
+namespace Cities.Helpers
 {
     public static class InfraData
     {

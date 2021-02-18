@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Cities.Dtos;
-using Cities.Helps;
+using Cities.Helpers;
 using Cities.Repositories;
 using System;
 using System.Collections.Generic;
