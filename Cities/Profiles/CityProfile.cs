@@ -18,6 +18,8 @@ namespace Cities.Profiles
 
             CreateMap<UserForRegisterDto, AppUser>();
             CreateMap<AppUser, UserForDisplayDto>();
+            CreateMap<UserForUpdateDto, AppUser>();
+            CreateMap<RoleForUpdateDto, AppRole>();
         }
     }
 }

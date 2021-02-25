@@ -13,8 +13,8 @@ namespace HClient
     {
         static void Main(string[] args)
         {
-            /*string weather = GetCityWeather("Amsterdam", "us");
-            Console.WriteLine($"weather: {weather}");*/
+            string weather = GetCityWeather("Amsterdam", "us");
+            Console.WriteLine($"weather: {weather}");
 
             foreach(var cname in InfraData.CountriesNames) Console.WriteLine(cname);
 

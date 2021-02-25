@@ -1,4 +1,5 @@
-﻿using Cities.Models;
+﻿using Cities.Helpers;
+using Cities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Cities.Repositories
     public interface IUserRepo
     {
         IQueryable<AppUser> GetUser(int id);
-        IOrderedQueryable<AppUser> GetUsers();
+        IQueryable<AppUser> GetUsers();
+        Task<bool> SaveAll();
     }
 }

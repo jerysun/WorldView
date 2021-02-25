@@ -16,9 +16,9 @@ namespace Cities.Repositories
             _context = context;
         }
 
-        public void Add<T>(T enitty) where T : class
+        public void Add<T>(T entity) where T : class
         {
-            _context.Add(enitty);
+            _context.Add(entity);
         }
 
         public void Delete<T>(T entity) where T : class

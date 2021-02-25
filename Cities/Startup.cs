@@ -19,6 +19,9 @@ using Cities.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Cities.Helpers;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace Cities
 {
@@ -62,6 +65,14 @@ namespace Cities
                     };
                 });
 
+            //use these policies to protect our endpoints, they empower different users different rights/privileges
+            services.AddAuthorization(options => {
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("RequireModeratorRole", policy => policy.RequireRole("Admin", "Moderator"));
+                options.AddPolicy("RequireMemberRole", policy => policy.RequireRole("Admin", "Moderator", "Member"));
+                options.AddPolicy("VipOnly", policy => policy.RequireRole("VIP"));
+            });
+
             services.AddDbContext<CityContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -70,13 +81,21 @@ namespace Cities
             services.AddScoped<IUserRepo, UserRepo>();
             services.AddScoped<IUserService, UserService>();
 
-            services.AddControllers().AddNewtonsoftJson(opt => {
+            services.AddControllers(options => {
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            })
+                .AddNewtonsoftJson(opt => {
                 opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 opt.SerializerSettings.ReferenceLoopHandling =
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
             services.AddCors();
+
+            services.AddScoped<LogUserActivity>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -12,11 +12,13 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cities.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class AccountController : ControllerBase
     {
         private readonly IConfiguration _config;

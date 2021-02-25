@@ -8,7 +8,7 @@ namespace Cities.Helpers
     public class UserParams
     {
         private const int MaxPageSize = 50;
-        private int pageSize = 10; //initial value
+        private int pageSize = 3; //initial value
 
         public int PageNumber { get; set; } = 1;//initial value and it's 1-based index
         public int PageSize
@@ -16,7 +16,7 @@ namespace Cities.Helpers
             get { return pageSize; }
             set { pageSize = value > MaxPageSize ? MaxPageSize : value; }
         }
-        //public int UserId { get; set; }
+        public int UserId { get; set; }
         public string OrderBy { get; set; }
     }
 }

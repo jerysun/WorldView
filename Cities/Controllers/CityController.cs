@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Cities.Services;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cities.Controllers
 {
@@ -20,11 +21,11 @@ namespace Cities.Controllers
         private readonly ICityRepo _repo;
         private readonly ICityService _service;
         private readonly IMapper _mapper;
-        private readonly ILogger<CityController> _logger;
+        //private readonly ILogger<CityController> _logger;
 
-        public CityController(ILogger<CityController> logger, ICityRepo repo, ICityService service, IMapper mapper)
+        public CityController(/*ILogger<CityController> logger, */ICityRepo repo, ICityService service, IMapper mapper)
         {
-            _logger = logger;
+            //_logger = logger;
             _repo = repo;
             _service = service;
             _mapper = mapper;
@@ -43,6 +44,7 @@ namespace Cities.Controllers
         }
 
         // GET	/api/v1/city
+        [Authorize(Policy = "RequireMemberRole")]
         [HttpGet("listall")]
         public async Task<IActionResult> ListCities()
         {
@@ -60,6 +62,7 @@ namespace Cities.Controllers
         }
 
         // POST	/api/v1/city
+        [Authorize(Policy = "RequireModeratorRole")]
         [HttpPost]
         public async Task<IActionResult> UploadCity([FromBody] CityUploadDto cityUploadDto)
         {
@@ -73,6 +76,7 @@ namespace Cities.Controllers
         }
 
         // PUT /api/v1/city/3
+        [Authorize(Policy = "RequireModeratorRole")]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateCity(int id, CityUpdateDto cityUpdateDto)
         {
@@ -98,6 +102,7 @@ namespace Cities.Controllers
         }
 
         // PATCH /api/v1/city/3
+        [Authorize(Policy = "RequireModeratorRole")]
         [HttpPatch("{id:int}")]
         public async Task<IActionResult> PatchCity(int id, [FromBody] JsonPatchDocument<City> patchEntity)
         {
@@ -112,6 +117,7 @@ namespace Cities.Controllers
         }
 
         // DELETE /api/v1/city/3
+        [Authorize(Policy = "RequireModeratorRole")]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteCity(int id)
         {

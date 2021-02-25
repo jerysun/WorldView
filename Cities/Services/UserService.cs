@@ -28,14 +28,14 @@ namespace Cities.Services
             return appUser;
         }
 
-        public async Task<List<AppUser>> GetUsers(UserParams userParams)
+        public async Task<PagedList<AppUser>> GetUsers(UserParams userParams)
         {
             var source = _userRepo.GetUsers();
-            //source = (IOrderedQueryable<AppUser>)source.Where(u => u.Id != userParams.UserId);
+            source = source.Where(u => u.Id != userParams.UserId);
 
             if (!string.IsNullOrEmpty(userParams.OrderBy))
             {
-                switch(userParams.OrderBy)
+                switch (userParams.OrderBy)
                 {
                     case "created":
                         source = source.OrderByDescending(u => u.Created);
@@ -45,8 +45,13 @@ namespace Cities.Services
                 }
             }
 
-            var appUsers = await source.ToListAsync();
+            var appUsers = await PagedList<AppUser>.CreateAsync(source, userParams.PageNumber, userParams.PageSize);
             return appUsers;
+        }
+
+        public async Task<bool> SaveAll()
+        {
+            return await _userRepo.SaveAll();
         }
     }
 }

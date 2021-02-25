@@ -9,7 +9,8 @@ namespace Cities.Services
 {
     public interface IUserService
     {
-        Task<List<AppUser>> GetUsers(UserParams userParams);
+        Task<PagedList<AppUser>> GetUsers(UserParams userParams);
         Task<AppUser> GetUser(int id, bool isCurrentUser);
+        Task<bool> SaveAll();
     }
 }

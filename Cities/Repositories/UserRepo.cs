@@ -1,4 +1,5 @@
 ﻿using Cities.Data;
+using Cities.Helpers;
 using Cities.Models;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,14 @@ namespace Cities.Repositories
             return _context.Users.AsQueryable();
         }
 
-        public IOrderedQueryable<AppUser> GetUsers()
+        public IQueryable<AppUser> GetUsers()
         {
-            return (IOrderedQueryable<AppUser>) _context.Users.OrderByDescending(u => u.LastActive).AsQueryable();
+            return _context.Users.OrderByDescending(u => u.LastActive).AsQueryable();
+        }
+
+        public async Task<bool> SaveAll()
+        {
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }
