@@ -13,6 +13,7 @@ This project offers the web APIs for companies or individuals to access and mana
 - DTO
 - JWT
 - Complete CRUD with HTTP PATCH method
+- Users management based on the roles group
 
 ## API Design Specifications
 
