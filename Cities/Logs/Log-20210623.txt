@@ -1,0 +1,7 @@
+2021-06-23T22:27:57.4815781+02:00  [INF] Now listening on: "https://localhost:5001" (d826f4b8)
+2021-06-23T22:27:57.4866886+02:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2021-06-23T22:27:57.4881367+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-06-23T22:27:57.4891660+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-06-23T22:27:57.4902272+02:00  [INF] Content root path: "D:\projects\ms\WorldView\Cities" (b5d60022)
+2021-06-23T22:28:08.9496191+02:00 0HM9MGLK20L98:00000001 [INF] Country: United States of America, Weather:broken clouds, 23°C (f4af38fa)
+2021-06-23T22:29:35.9454517+02:00  [INF] Application is shutting down... (90f52c38)

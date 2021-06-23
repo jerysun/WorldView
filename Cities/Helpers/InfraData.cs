@@ -88,7 +88,7 @@ namespace Cities.Helpers
         {
             double tDbl = k - 273.15 + 0.5;
             int tInt = (int)tDbl;
-            return tInt.ToString()+"C";
+            return tInt.ToString() + "°C";
         }
     }
 }

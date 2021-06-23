@@ -21,11 +21,11 @@ namespace Cities.Controllers
         private readonly ICityRepo _repo;
         private readonly ICityService _service;
         private readonly IMapper _mapper;
-        //private readonly ILogger<CityController> _logger;
+        private readonly ILogger<CityController> _logger;
 
-        public CityController(/*ILogger<CityController> logger, */ICityRepo repo, ICityService service, IMapper mapper)
+        public CityController(ILogger<CityController> logger, ICityRepo repo, ICityService service, IMapper mapper)
         {
-            //_logger = logger;
+            _logger = logger;
             _repo = repo;
             _service = service;
             _mapper = mapper;
@@ -40,6 +40,7 @@ namespace Cities.Controllers
                 return NotFound();
 
             cityFromRepo.Weather = InfraData.GetCityWeather(name, code);
+            _logger.LogInformation($"Country: {cityFromRepo.Country}, Weather:{cityFromRepo.Weather}");
             return Ok(cityFromRepo);
         }
 
