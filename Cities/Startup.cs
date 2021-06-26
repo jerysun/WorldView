@@ -67,10 +67,10 @@ namespace Cities
 
             //use these policies to protect our endpoints, they empower different users different rights/privileges
             services.AddAuthorization(options => {
-                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
-                options.AddPolicy("RequireModeratorRole", policy => policy.RequireRole("Admin", "Moderator"));
-                options.AddPolicy("RequireMemberRole", policy => policy.RequireRole("Admin", "Moderator", "Member"));
-                options.AddPolicy("VipOnly", policy => policy.RequireRole("VIP"));
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole(RolesName.Admin));
+                options.AddPolicy("RequireModeratorRole", policy => policy.RequireRole(RolesName.Admin, RolesName.Moderator));
+                options.AddPolicy("RequireMemberRole", policy => policy.RequireRole(RolesName.Admin, RolesName.Moderator, RolesName.Member));
+                options.AddPolicy("VipOnly", policy => policy.RequireRole(RolesName.VIP));
             });
 
             services.AddDbContext<CityContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));

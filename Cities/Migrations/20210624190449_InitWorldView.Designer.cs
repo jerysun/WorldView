@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cities.Migrations
 {
     [DbContext(typeof(CityContext))]
-    [Migration("20210218183522_InitialMigrationWithAspNetUsers")]
-    partial class InitialMigrationWithAspNetUsers
+    [Migration("20210624190449_InitWorldView")]
+    partial class InitWorldView
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

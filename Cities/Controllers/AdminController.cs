@@ -51,6 +51,7 @@ namespace Cities.Controllers
             return Ok(userList);
         }
 
+        //api/v1/admin/editRoles/userName
         [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("editRoles/{userName}")]
         public async Task<IActionResult> EditRoles(string userName, RoleEditDto roleEditDto)

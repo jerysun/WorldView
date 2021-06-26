@@ -1,0 +1,35 @@
+[
+  {
+    "name": "Boston",
+    "state": "Massachusettes",
+    "country": "United States of America",
+    "toruistRating": 3,
+    "dateEstablished": "1819-02-21T00:00:00",
+    "population": 1000000,
+    "alpha2Code": "US",
+    "alpha3Code": "USA",
+    "currenciesCode": "USD",
+    "weather": "snow"
+  },
+  {
+    "name": "Berlin",
+    "state": "Berlin",
+    "country": "Germany",
+    "toruistRating": 4,
+    "dateEstablished": "1813-01-17T00:00:00",
+    "population": 6200000,
+    "alpha2Code": "DE",
+    "alpha3Code": "DEU",
+    "currenciesCode": "EUR"
+  },
+  {
+    "name": "Frankfurt",
+    "country": "Germany",
+    "toruistRating": 4,
+    "dateEstablished": "1771-11-22T12:11:00",
+    "population": 2900000,
+    "alpha2Code": "DE",
+    "alpha3Code": "DEU",
+    "currenciesCode": "EUR"
+  }
+]

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cities.Migrations
 {
-    public partial class InitialMigrationWithAspNetUsers : Migration
+    public partial class InitWorldView : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

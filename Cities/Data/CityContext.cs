@@ -35,7 +35,7 @@ namespace Cities.Data
             });
 
             // ur means combination(actually ur is an instance of class AppUserRole)
-            // which Helpers HasKey() form the primary key, so table AppUserRole
+            // with Helpers HasKey() forms the primary key, so table AppUserRole
             // will have a primary key although we don't create this pro-
             // perty explicitly in AppUserRole.cs.
             // builder.Entity<T>() returns an object that can be used to
