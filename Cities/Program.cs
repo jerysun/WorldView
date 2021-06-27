@@ -7,8 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,11 +21,15 @@ namespace Cities
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
+            var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+
+            //Initializer logger 
+            Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(config).CreateLogger();
+            Log.Information("Application Starting.##############");
 
             using (var scope = host.Services.CreateScope())
             {
                 var service = scope.ServiceProvider;
-                var logger = service.GetRequiredService<ILogger<Program>>();
 
                 try
                 {
@@ -32,22 +38,23 @@ namespace Cities
                     var roleManager = service.GetRequiredService<RoleManager<AppRole>>();
                     context.Database.Migrate();
                     Seed.SeedUsers(userManager, roleManager);
-                    logger.LogInformation("User tables are created.");
+                    Log.Information("User tables are created.");
 
                     Seed.SeedCities(service);
-                    logger.LogInformation("City table is created.");
+                    Log.Information("City table is created.");
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, "An error occured during migration.");
+                    Log.Fatal(ex, "An error occurred during migration.");
                 }
             }
 
             host.Run();
+            Log.CloseAndFlush();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+            Host.CreateDefaultBuilder(args).UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

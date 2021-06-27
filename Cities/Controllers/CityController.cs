@@ -8,9 +8,9 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Cities.Services;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Authorization;
+using Serilog;
 
 namespace Cities.Controllers
 {
@@ -21,11 +21,11 @@ namespace Cities.Controllers
         private readonly ICityRepo _repo;
         private readonly ICityService _service;
         private readonly IMapper _mapper;
-        private readonly ILogger<CityController> _logger;
+        //private readonly ILogger<CityController> _logger;
 
-        public CityController(ILogger<CityController> logger, ICityRepo repo, ICityService service, IMapper mapper)
+        public CityController(/*ILogger<CityController> logger, */ICityRepo repo, ICityService service, IMapper mapper)
         {
-            _logger = logger;
+            //_logger = logger;
             _repo = repo;
             _service = service;
             _mapper = mapper;
@@ -40,7 +40,8 @@ namespace Cities.Controllers
                 return NotFound();
 
             cityFromRepo.Weather = InfraData.GetCityWeather(name, code);
-            _logger.LogInformation($"Country: {cityFromRepo.Country}, Weather:{cityFromRepo.Weather}");
+            //_logger.LogWarning($"Country: {cityFromRepo.Country}, Weather:{cityFromRepo.Weather}");
+            Log.Warning("Country: {0}, Weather:{1}", cityFromRepo.Country, cityFromRepo.Weather);
             return Ok(cityFromRepo);
         }
 

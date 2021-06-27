@@ -77,7 +77,7 @@ The response is:
     "alpha2Code": "US",
     "alpha3Code": "USA",
     "currenciesCode": "USD",
-    "weather": "snow, -2C"
+    "weather": "snow, -2°C"
 }
 ```
 
