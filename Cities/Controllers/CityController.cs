@@ -68,7 +68,10 @@ namespace Cities.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadCity([FromBody] CityUploadDto cityUploadDto)
         {
-            if (cityUploadDto == null || !InfraData.CountriesNames.Contains(cityUploadDto.Country))
+            if (cityUploadDto == null)
+                return BadRequest("ArgumentNullException!");
+
+            if(!InfraData.CountriesNames.Contains(cityUploadDto.Country))
                 return BadRequest("The country name is incorrect!");
 
             var result = await _service.UploadCityAsync(cityUploadDto);
@@ -82,7 +85,7 @@ namespace Cities.Controllers
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateCity(int id, CityUpdateDto cityUpdateDto)
         {
-            if (cityUpdateDto == null) return BadRequest();
+            if (cityUpdateDto == null) return BadRequest("ArgumentNullException!");
 
             var cityFromRepo = await _service.GetCityByIdAsync(id);
             if (cityFromRepo == null) return NotFound();
@@ -108,7 +111,7 @@ namespace Cities.Controllers
         [HttpPatch("{id:int}")]
         public async Task<IActionResult> PatchCity(int id, [FromBody] JsonPatchDocument<City> patchEntity)
         {
-            if (patchEntity == null) return BadRequest();
+            if (patchEntity == null) return BadRequest("ArgumentNullException!");
 
             var cityFromRepo = await _service.GetCityByIdAsync(id);
             if (cityFromRepo == null) return NotFound();
