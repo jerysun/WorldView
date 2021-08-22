@@ -18,15 +18,13 @@ namespace Cities.Controllers
     [ApiController]
     public class CityController : ControllerBase
     {
-        private readonly ICityRepo _repo;
         private readonly ICityService _service;
         private readonly IMapper _mapper;
-        //private readonly ILogger<CityController> _logger;
+        private readonly ILogger<CityController> _logger;
 
-        public CityController(/*ILogger<CityController> logger, */ICityRepo repo, ICityService service, IMapper mapper)
+        public CityController(/*ILogger<CityController> logger, */ICityService service, IMapper mapper)
         {
             //_logger = logger;
-            _repo = repo;
             _service = service;
             _mapper = mapper;
         }

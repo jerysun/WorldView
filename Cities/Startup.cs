@@ -18,8 +18,6 @@ using System.Text;
 using Cities.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using System.IO;
-using Microsoft.Extensions.Logging;
 
 namespace Cities
 {

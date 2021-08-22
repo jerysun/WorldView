@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cities.Migrations
 {
     [DbContext(typeof(CityContext))]
-    [Migration("20210624190449_InitWorldView")]
-    partial class InitWorldView
+    [Migration("20210822213751_InitDb")]
+    partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
